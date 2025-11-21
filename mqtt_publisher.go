@@ -9,35 +9,8 @@ import (
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
 
-// daftar parameter sesuai data kamu
-var parameters = []string{
-	"Entering_Chilled_Water_Temp",
-	"Leaving_Chilled_Water_Temp",
-	"Entering_Cooled_Water_Temp",
-	"Leaving_Cooled_Water_Temp",
-	"Leaving_Chilled_Water_Temp_Settings",
-	"C1_Suction_Temp",
-	"C1_Discharge_Temp",
-	"C1_Suction_Pressure",
-	"C1_Discharge_Pressure",
-	"C1_Load",
-	"C1_Current",
-	"C1_Actual_Speed",
-	"C1_Voltage",
-	"C1_Power",
-	"C2_Suction_Temp",
-	"C2_Discharge_Temp",
-	"C2_Suction_Pressure",
-	"C2_Discharge_Pressure",
-	"C2_Load",
-	"C2_Current",
-	"C2_Actual_Speed",
-	"C2_Voltage",
-	"C2_Power",
-}
-
 func DispatchMqttPublisher() {
-	// ====== Konfigurasi MQTT ======
+
 	broker := "tcp://localhost:1883"
 	topic := "sensor/data"
 	clientID := "golang-random-publisher"
@@ -56,19 +29,40 @@ func DispatchMqttPublisher() {
 
 	rand.Seed(time.Now().UnixNano())
 
-	// ====== Loop kirim data setiap 2 detik ======
 	for {
-		data := make(map[string]map[string]float64)
-		data["data"] = make(map[string]float64)
-		for _, param := range parameters {
-			data["data"][param] = float64(rand.Intn(100) + 1) // nilai acak 1–100
-		}
+		// ==== struktur JSON ====
+		payload := make(map[string]interface{})
+		data := make(map[string]interface{})
 
-		jsonData, _ := json.Marshal(data)
+		// ===== isi 15 property =====
+
+		data["1_Chiller_Operating_State"] = []bool{rand.Intn(2) == 1}
+		data["1_Entering_Chilled_Water_Temp"] = []int{rand.Intn(120)}
+		data["1_Compressor1_Load"] = []int{rand.Intn(800)}
+		data["1_Compressor2_Load"] = []int{rand.Intn(800)}
+		data["1_Leaving_Chilled_Water_Temp"] = []int{rand.Intn(120)}
+		data["1_Entering_Cooled_Water_Temp"] = []int{rand.Intn(400)}
+		data["1_Leaving_Cooled_Water_Temp"] = []int{rand.Intn(400)}
+		data["1_Leaving_Chilled_Water_Temp_Settings"] = []int{60}
+		data["1_Chiller_COP"] = []float64{rand.Float64()*8 + 1}
+		data["1_Comp1Power"] = []int{rand.Intn(700)}
+		data["1_Comp2Power"] = []int{rand.Intn(700)}
+		data["1_Comp1RunningTime"] = []int{22909}
+		data["1_Comp2RunningTime"] = []int{22914}
+		data["1_Comp1OperatingState"] = []bool{rand.Intn(2) == 1}
+		data["1_Comp2OperatingState"] = []bool{rand.Intn(2) == 1}
+
+		// ===== masukkan ke payload =====
+		payload["d"] = data
+		payload["ts"] = time.Now().Format(time.RFC3339Nano)
+
+		jsonData, _ := json.Marshal(payload)
+
 		token := client.Publish(topic, 0, false, jsonData)
 		token.Wait()
 
 		fmt.Println("📤 Published:", string(jsonData))
+
 		time.Sleep(2 * time.Second)
 	}
 }
