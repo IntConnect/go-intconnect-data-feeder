@@ -12,7 +12,7 @@ import (
 func DispatchMqttPublisher() {
 
 	broker := "tcp://localhost:1883"
-	topic := "sensor/data"
+	topic := "sensor/payload"
 	clientID := "golang-random-publisher"
 
 	opts := mqtt.NewClientOptions()
