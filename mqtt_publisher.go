@@ -51,6 +51,31 @@ func DispatchMqttPublisher() {
 		data["1_Comp2RunningTime"] = []int{22914}
 		data["1_Comp1OperatingState"] = []bool{rand.Intn(2) == 1}
 		data["1_Comp2OperatingState"] = []bool{rand.Intn(2) == 1}
+		// Actual Speed (RPM)
+		data["1_Comp1ActualSpeed"] = []int{rand.Intn(3600)}
+		data["1_Comp2ActualSpeed"] = []int{rand.Intn(3600)}
+
+		// Chiller Load (kW)
+		data["1_Chiller1 Load KW"] = []int{rand.Intn(800_000)}
+
+		// Pressure (kPa)
+		data["1_Comp1DischargePressure"] = []int{rand.Intn(8000)}
+		data["1_Comp1SuctionPressure"] = []int{rand.Intn(5000)}
+		data["1_Comp2DischargePressure"] = []int{rand.Intn(8000)}
+		data["1_Comp2SuctionPressure"] = []int{rand.Intn(5000)}
+
+		// Temperature (°C * 10 atau raw PLC value)
+		data["1_Comp1DischargeTemp"] = []int{rand.Intn(400)}
+		data["1_Comp1SuctionTemp"] = []int{rand.Intn(350)}
+		data["1_Comp2DischargeTemp"] = []int{rand.Intn(400)}
+		data["1_Comp2SuctionTemp"] = []int{rand.Intn(350)}
+
+		// Electrical
+		data["1_Comp1Current"] = []int{rand.Intn(800)}
+		data["1_Comp2Current"] = []int{rand.Intn(800)}
+
+		data["1_Comp1Voltage"] = []int{rand.Intn(440)}
+		data["1_Comp2Voltage"] = []int{rand.Intn(440)}
 
 		// ===== masukkan ke payload =====
 		payload["d"] = data
