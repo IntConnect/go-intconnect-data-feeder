@@ -36,46 +36,46 @@ func DispatchMqttPublisher() {
 
 		// ===== isi 15 property =====
 
-		data["1_Chiller_Operating_State"] = []bool{rand.Intn(2) == 1}
-		data["1_Entering_Chilled_Water_Temp"] = []int{rand.Intn(120)}
-		data["1_Compressor1_Load"] = []int{rand.Intn(800)}
-		data["1_Compressor2_Load"] = []int{rand.Intn(800)}
-		data["1_Leaving_Chilled_Water_Temp"] = []int{rand.Intn(120)}
-		data["1_Entering_Cooled_Water_Temp"] = []int{rand.Intn(400)}
-		data["1_Leaving_Cooled_Water_Temp"] = []int{rand.Intn(400)}
-		data["1_Leaving_Chilled_Water_Temp_Settings"] = []int{60}
-		data["1_Chiller_COP"] = []float64{rand.Float64()*8 + 1}
-		data["1_Comp1Power"] = []int{rand.Intn(700)}
-		data["1_Comp2Power"] = []int{rand.Intn(700)}
-		data["1_Comp1RunningTime"] = []int{22909}
-		data["1_Comp2RunningTime"] = []int{22914}
-		data["1_Comp1OperatingState"] = []bool{rand.Intn(2) == 1}
-		data["1_Comp2OperatingState"] = []bool{rand.Intn(2) == 1}
+		data["1_Chiller_Operating_State"] = rand.Intn(2) == 1
+		data["1_Entering_Chilled_Water_Temp"] = rand.Intn(120)
+		data["1_Compressor1_Load"] = rand.Intn(800)
+		data["1_Compressor2_Load"] = rand.Intn(800)
+		data["1_Leaving_Chilled_Water_Temp"] = rand.Intn(120)
+		data["1_Entering_Cooled_Water_Temp"] = rand.Intn(400)
+		data["1_Leaving_Cooled_Water_Temp"] = rand.Intn(400)
+		data["1_Leaving_Chilled_Water_Temp_Settings"] = 60
+		data["1_Chiller_COP"] = rand.Float64()*8 + 1
+		data["1_Comp1Power"] = rand.Intn(700)
+		data["1_Comp2Power"] = rand.Intn(700)
+		data["1_Comp1RunningTime"] = 22909
+		data["1_Comp2RunningTime"] = 22914
+		data["1_Comp1OperatingState"] = rand.Intn(2) == 1
+		data["1_Comp2OperatingState"] = rand.Intn(2) == 1
 		// Actual Speed (RPM)
-		data["1_Comp1ActualSpeed"] = []int{rand.Intn(3600)}
-		data["1_Comp2ActualSpeed"] = []int{rand.Intn(3600)}
+		data["1_Comp1ActualSpeed"] = rand.Intn(3600)
+		data["1_Comp2ActualSpeed"] = rand.Intn(3600)
 
 		// Chiller Load (kW)
-		data["1_Chiller1 Load KW"] = []int{rand.Intn(800_000)}
+		data["1_Chiller1 Load KW"] = rand.Intn(800_000)
 
 		// Pressure (kPa)
-		data["1_Comp1DischargePressure"] = []int{rand.Intn(8000)}
-		data["1_Comp1SuctionPressure"] = []int{rand.Intn(5000)}
-		data["1_Comp2DischargePressure"] = []int{rand.Intn(8000)}
-		data["1_Comp2SuctionPressure"] = []int{rand.Intn(5000)}
+		data["1_Comp1DischargePressure"] = rand.Intn(8000)
+		data["1_Comp1SuctionPressure"] = rand.Intn(5000)
+		data["1_Comp2DischargePressure"] = rand.Intn(8000)
+		data["1_Comp2SuctionPressure"] = rand.Intn(5000)
 
 		// Temperature (°C * 10 atau raw PLC value)
-		data["1_Comp1DischargeTemp"] = []int{rand.Intn(400)}
-		data["1_Comp1SuctionTemp"] = []int{rand.Intn(350)}
-		data["1_Comp2DischargeTemp"] = []int{rand.Intn(400)}
-		data["1_Comp2SuctionTemp"] = []int{rand.Intn(350)}
+		data["1_Comp1DischargeTemp"] = rand.Intn(400)
+		data["1_Comp1SuctionTemp"] = rand.Intn(350)
+		data["1_Comp2DischargeTemp"] = rand.Intn(400)
+		data["1_Comp2SuctionTemp"] = rand.Intn(350)
 
 		// Electrical
-		data["1_Comp1Current"] = []int{rand.Intn(800)}
-		data["1_Comp2Current"] = []int{rand.Intn(800)}
+		data["1_Comp1Current"] = rand.Intn(800)
+		data["1_Comp2Current"] = rand.Intn(800)
 
-		data["1_Comp1Voltage"] = []int{rand.Intn(440)}
-		data["1_Comp2Voltage"] = []int{rand.Intn(440)}
+		data["1_Comp1Voltage"] = rand.Intn(440)
+		data["1_Comp2Voltage"] = rand.Intn(440)
 
 		// ===== masukkan ke payload =====
 		payload["d"] = data
